@@ -24,6 +24,18 @@ public:
   // Add a bond to the service (convenience method)
   void Add(Bond &bond);
 
+
+  vector<Bond> GetBonds(string& _ticker) 
+  {
+      vector<Bond> bonds;
+      for (auto& item : bondMap) {
+          if (item.second.GetTicker() == _ticker) {
+              bonds.push_back(item.second);
+          }
+      }
+      return bonds;
+  }
+
 private:
   map<string,Bond> bondMap; // cache of bond products
 
@@ -44,6 +56,98 @@ public:
 
   // Add a bond to the service (convenience method)
   void Add(IRSwap &swap);
+
+
+  //Get Swaps by Fixed Leg Day Count Convention
+  vector<IRSwap> GetSwaps(DayCountConvention _fixedLegDayCountConvention) 
+  {
+      vector<IRSwap> swaps;
+      for (auto& item : swapMap) {
+          if (item.second.GetFixedLegDayCountConvention() == _fixedLegDayCountConvention) 
+          {
+              swaps.push_back(item.second);
+          }
+      }
+      return swaps;
+  }
+
+  //Get Swaps by Fixed Leg Payment Frequency
+  vector<IRSwap> GetSwaps(PaymentFrequency _fixedLegPaymentFrequency) 
+  {
+      vector<IRSwap> swaps;
+      for (auto& item : swapMap) {
+          if (item.second.GetFixedLegPaymentFrequency() == _fixedLegPaymentFrequency) 
+          {
+              swaps.push_back(item.second);
+          }
+      }
+      return swaps;
+  }
+
+  //Get Swaps by Floating Index
+  vector<IRSwap> GetSwaps(FloatingIndex _floatingIndex) 
+  {
+      vector<IRSwap> swaps;
+      for (auto& item : swapMap) {
+          if (item.second.GetFloatingIndex() == _floatingIndex) {
+              swaps.push_back(item.second);
+          }
+      }
+      return swaps;
+  }
+
+  //Get Swaps with a Term in Years Greater Than a Value
+  vector<IRSwap> GetSwapsGreaterThan(int _termYears) 
+  {
+      vector<IRSwap> swaps;
+      for (auto& item : swapMap) {
+          if (item.second.GetTermYears() > _termYears) 
+          {
+              swaps.push_back(item.second);
+          }
+      }
+      return swaps;
+  }
+
+  //Get Swaps with a Term in Years Less Than a Value
+  vector<IRSwap> GetSwapsLessThan(int _termYears) 
+  {
+      vector<IRSwap> swaps;
+      for (auto& item : swapMap) {
+          if (item.second.GetTermYears() < _termYears) 
+          {
+              swaps.push_back(item.second);
+          }
+      }
+      return swaps;
+  }
+
+  //Get Swaps by Swap Type
+  vector<IRSwap> GetSwaps(SwapType _swapType) 
+  {
+      vector<IRSwap> swaps;
+      for (auto& item : swapMap) {
+          if (item.second.GetSwapType() == _swapType) 
+          {
+              swaps.push_back(item.second);
+          }
+      }
+      return swaps;
+  }
+
+  //Get Swaps by Swap Leg Type
+  vector<IRSwap> GetSwaps(SwapLegType _swapLegType) 
+  {
+      vector<IRSwap> swaps;
+      for (auto& item : swapMap) 
+      {
+          if (item.second.GetSwapLegType() == _swapLegType) {
+              swaps.push_back(item.second);
+          }
+      }
+      return swaps;
+  }
+
 
 private:
   map<string,IRSwap> swapMap; // cache of IR Swap products
